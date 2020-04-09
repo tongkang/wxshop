@@ -1,7 +1,5 @@
 package com.tongkang.wxshop.generator;
 
-import com.tongkang.wxshop.generator.Shop;
-import com.tongkang.wxshop.generator.ShopExample;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
