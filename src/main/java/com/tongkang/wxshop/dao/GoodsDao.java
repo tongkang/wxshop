@@ -3,7 +3,6 @@ package com.tongkang.wxshop.dao;
 import com.tongkang.wxshop.entity.DataStatus;
 import com.tongkang.wxshop.generator.Goods;
 import com.tongkang.wxshop.generator.GoodsMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
