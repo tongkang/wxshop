@@ -27,19 +27,18 @@ public class GoodsService {
 
     public Goods createGoods(Goods goods) {
 
-//        return goodsDao.insertGoods(goods);
 
 //        要在所在的商店中才能进行创建商品
-//        Shop shop = shopMapper.selectByPrimaryKey(goods.getShopId());
-//
-//        if (Objects.equals(shop.getOwnerUserId(), UserContext.getCurrentUser().getId())) {
+        Shop shop = shopMapper.selectByPrimaryKey(goods.getShopId());
+
+        if (Objects.equals(shop.getOwnerUserId(), UserContext.getCurrentUser().getId())) {
         goods.setStatus(DataStatus.OK.getName());
         long id = goodsMapper.insert(goods);
         goods.setId(id);
         return goods;
-//        } else {
-//            throw HttpException.forbidden("无权访问！");
-//        }
+        } else {
+            throw HttpException.forbidden("无权访问！");
+        }
     }
 
     public Goods deleteGoodsById(Long goodsId) {
@@ -92,9 +91,9 @@ public class GoodsService {
     }
 
     public Goods updateGoods(Goods goods) {
-//        Shop shop = shopMapper.selectByPrimaryKey(goods.getShopId());
-//
-//        if (Objects.equals(shop.getOwnerUserId(), UserContext.getCurrentUser().getId())) {
+        Shop shop = shopMapper.selectByPrimaryKey(goods.getShopId());
+
+        if (Objects.equals(shop.getOwnerUserId(), UserContext.getCurrentUser().getId())) {
             GoodsExample byId = new GoodsExample();
             byId.createCriteria().andIdEqualTo(goods.getId());
             int affecteRows = goodsMapper.updateByExample(goods, byId);
@@ -102,9 +101,9 @@ public class GoodsService {
                 throw HttpException.notFound("没找到");
             }
             return goods;
-//        } else {
-//            throw HttpException.forbidden("无权访问！");
-//        }
+        } else {
+            throw HttpException.forbidden("无权访问！");
+        }
     }
 
     public static class NotAuthorizedForShopException extends RuntimeException {
