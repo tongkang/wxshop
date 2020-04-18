@@ -1,13 +1,17 @@
 package com.tongkang.wxshop.controller;
 
 import com.tongkang.wxshop.entity.HttpException;
+import com.tongkang.wxshop.entity.PageResponse;
 import com.tongkang.wxshop.entity.Response;
 import com.tongkang.wxshop.entity.ShoppingCartData;
 import com.tongkang.wxshop.service.ShoppingCartService;
+import com.tongkang.wxshop.service.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -64,5 +68,16 @@ public class ShoppingCartController {
         public void setNumber(int number) {
             this.number = number;
         }
+    }
+
+    //获取当前用户名下的所有购物车物品
+    @GetMapping("/shoppingCart")
+    public PageResponse<ShoppingCartData> getShoppingCart(
+            @RequestParam("pageNum") int pageNum,
+            @RequestParam("pageSize") int pageSize
+    ) {
+        return shoppingCartService.getShoppingCartOfUser(UserContext.getCurrentUser().getId(),
+                pageNum,
+                pageSize);
     }
 }

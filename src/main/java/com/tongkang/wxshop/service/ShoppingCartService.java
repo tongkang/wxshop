@@ -4,6 +4,7 @@ import com.tongkang.wxshop.controller.ShoppingCartController;
 import com.tongkang.wxshop.dao.ShoppingCartQueryMapper;
 import com.tongkang.wxshop.entity.DataStatus;
 import com.tongkang.wxshop.entity.HttpException;
+import com.tongkang.wxshop.entity.PageResponse;
 import com.tongkang.wxshop.entity.ShoppingCartData;
 import com.tongkang.wxshop.entity.ShoppingCartGoods;
 import com.tongkang.wxshop.generator.Goods;
@@ -24,9 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.*;
 
 @Service
 public class ShoppingCartService {
@@ -41,6 +40,20 @@ public class ShoppingCartService {
         this.shoppingCartQueryMapper = shoppingCartQueryMapper;
         this.goodsMapper = goodsMapper;
         this.sqlSessionFactory = sqlSessionFactory;
+    }
+
+    public PageResponse<ShoppingCartData> getShoppingCartOfUser(Long userId, int pageNum, int pageSize) {
+            int offset = (pageNum - 1) * pageSize;
+        int totalNum = shoppingCartQueryMapper.countHowManyShopsInUserShoppingCart(userId);
+        List<ShoppingCartData> pagedData = shoppingCartQueryMapper.selectShoppingCartDataByUserId(userId, pageSize, offset)
+                .stream()
+                .collect(groupingBy(shoppingCartData -> shoppingCartData.getShop().getId()))
+                .values()
+                .stream()
+                .map(this::merge)
+                .collect(toList());
+        int totalPage = totalNum % pageSize == 0 ? totalNum / pageSize : totalNum / pageSize + 1;
+        return PageResponse.pagedData(pageNum, pageSize, totalPage, pagedData);
     }
 
     public ShoppingCartData addToShoppingCart(ShoppingCartController.AddToShoppingCartRequest request) {
