@@ -9,12 +9,6 @@ spring:
 mybatis:
   config-location: classpath:db/mybatis/config.xml
 wxshop:
-  orderservice:
-    version: 1.0.0
-    url: ""
   redis:
-    host: 172.17.0.7
+    host: 127.0.0.1
     port: 6379
-dubbo:
-  registry:
-    address: zookeeper://127.0.0.1:2181

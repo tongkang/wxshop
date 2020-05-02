@@ -2,12 +2,10 @@ package com.tongkang.wxshop.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tongkang.wxshop.WxshopApplication;
-import com.tongkang.wxshop.api.OrderService;
 import com.tongkang.wxshop.entity.LoginResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -20,8 +18,6 @@ import static java.net.HttpURLConnection.HTTP_OK;
 @SpringBootTest(classes = WxshopApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AuthIntegrationTest extends AbstractIntegrationTest {
 
-    @Autowired
-    OrderService orderService;
 
     @Test
     public void loginLogoutTest() throws JsonProcessingException {

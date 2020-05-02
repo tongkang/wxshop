@@ -8,18 +8,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
 mybatis:
   config-location: classpath:db/mybatis/config.xml
-dubbo:
-  scan:
-    base-packages: com.tongkang.wxshop.mock
-  protocol:
-    name: dubbo
-    port: 12345
-  registry:
-    address: zookeeper://127.0.0.1:2181
 wxshop:
-  orderservice:
-    version: 1.0.0
-    url: dubbo://127.0.0.1:12345
   redis:
-    host: 172.17.0.5
+    host: 127.0.0.1
     port: 6380
