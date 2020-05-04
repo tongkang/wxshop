@@ -10,4 +10,4 @@ CREATE TABLE USER
 );
 
 INSERT INTO USER(ID,NAME, TEL, AVATAR_URL, ADDRESS)
-VALUES (1,'user1', '13800000000', 'http://url', '火星')
+VALUES (1,'user1', '15327295959', 'http://url', '火星')

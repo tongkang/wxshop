@@ -1,9 +1,11 @@
 package com.tongkang.wxshop.controller;
 
+import com.tongkang.api.rpc.OrderService;
 import com.tongkang.wxshop.entity.LoginResponse;
 import com.tongkang.wxshop.service.AuthService;
 import com.tongkang.wxshop.service.TelVerficationService;
 import com.tongkang.wxshop.service.UserContext;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/api/v1")
 public class AuthController {
+
 
     private final AuthService authService;
     private final TelVerficationService telVerficationService;
@@ -56,9 +59,13 @@ public class AuthController {
         SecurityUtils.getSubject().logout();
     }
 
+    @Reference(version = "${wxshop.orderservice.version}")
+    OrderService orderService;
 
     @GetMapping("/status")
     public Object loginStatus() {
+        System.out.println(orderService.sayHello("tongkang"));
+//        System.out.println(orderService.sayHello("abscsdfasf"));
         if (UserContext.getCurrentUser() == null) {
             return LoginResponse.notLogin();
         } else {
