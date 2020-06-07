@@ -10,6 +10,7 @@
         <typeAlias type="com.tongkang.wxshop.entity.ShoppingCartData" alias="ShoppingCartData"/>
         <typeAlias type="com.tongkang.wxshop.entity.ShoppingCartGoods" alias="ShoppingCartGoods"/>
         <typeAlias type="com.tongkang.wxshop.generator.Shop" alias="Shop"/>
+        <typeAlias type="com.hcsp.api.data.GoodsInfo" alias="GoodsInfo"/>
     </typeAliases>
     <mappers>
         <mapper resource="db/mybatis/UserMapper.xml"/>
@@ -18,5 +19,6 @@
         <mapper resource="db/mybatis/OrderMapper.xml"/>
         <mapper resource="db/mybatis/ShoppingCartMapper.xml"/>
         <mapper resource="db/mybatis/ShoppingCartQueryMapper.xml"/>
+        <mapper resource="db/mybatis/GoodsStockMapper.xml"/>
     </mappers>
 </configuration>

@@ -31,7 +31,6 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.2</version>
         </dependency>
 
         <dependency>
@@ -214,9 +213,9 @@
                     </execution>
                     <execution>
                         <id>default-check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
+                        <!--<goals>-->
+                            <!--<goal>check</goal>-->
+                        <!--</goals>-->
                         <configuration>
                             <rules>
                                 <rule>

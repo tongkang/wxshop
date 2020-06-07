@@ -2,7 +2,7 @@ package com.tongkang.wxshop.service;
 
 import com.tongkang.wxshop.controller.ShoppingCartController;
 import com.tongkang.wxshop.dao.ShoppingCartQueryMapper;
-import com.tongkang.wxshop.entity.DataStatus;
+import com.tongkang.api.DataStatus;
 import com.tongkang.wxshop.entity.HttpException;
 import com.tongkang.wxshop.entity.PageResponse;
 import com.tongkang.wxshop.entity.ShoppingCartData;
@@ -43,7 +43,7 @@ public class ShoppingCartService {
     }
 
     public PageResponse<ShoppingCartData> getShoppingCartOfUser(Long userId, int pageNum, int pageSize) {
-            int offset = (pageNum - 1) * pageSize;
+        int offset = (pageNum - 1) * pageSize;
         int totalNum = shoppingCartQueryMapper.countHowManyShopsInUserShoppingCart(userId);
         List<ShoppingCartData> pagedData = shoppingCartQueryMapper.selectShoppingCartDataByUserId(userId, pageSize, offset)
                 .stream()

@@ -1,6 +1,6 @@
 package com.tongkang.wxshop.service;
 
-import com.tongkang.wxshop.entity.DataStatus;
+import com.tongkang.api.DataStatus;
 import com.tongkang.wxshop.entity.HttpException;
 import com.tongkang.wxshop.entity.PageResponse;
 import com.tongkang.wxshop.generator.Goods;
@@ -11,7 +11,10 @@ import com.tongkang.wxshop.generator.ShopMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+
+import static java.util.stream.Collectors.toMap;
 
 @Service
 public class GoodsService {
@@ -19,11 +22,18 @@ public class GoodsService {
     private GoodsMapper goodsMapper;
     private ShopMapper shopMapper;
 
-    public GoodsService(GoodsMapper goodsMapper, ShopMapper shopMapper) {
+    public GoodsService(GoodsMapper goodsMapper,
+                        ShopMapper shopMapper) {
         this.goodsMapper = goodsMapper;
         this.shopMapper = shopMapper;
     }
 
+    public Map<Long, Goods> getIdToGoodsMap(List<Long> goodsId) {
+        GoodsExample example = new GoodsExample();
+        example.createCriteria().andIdIn(goodsId);
+        List<Goods> goods = goodsMapper.selectByExample(example);
+        return goods.stream().collect(toMap(Goods::getId, x -> x));
+    }
 
     public Goods createGoods(Goods goods) {
 
@@ -32,10 +42,10 @@ public class GoodsService {
         Shop shop = shopMapper.selectByPrimaryKey(goods.getShopId());
 
         if (Objects.equals(shop.getOwnerUserId(), UserContext.getCurrentUser().getId())) {
-        goods.setStatus(DataStatus.OK.getName());
-        long id = goodsMapper.insert(goods);
-        goods.setId(id);
-        return goods;
+            goods.setStatus(DataStatus.OK.getName());
+            long id = goodsMapper.insert(goods);
+            goods.setId(id);
+            return goods;
         } else {
             throw HttpException.forbidden("无权访问！");
         }

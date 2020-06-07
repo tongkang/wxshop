@@ -1,13 +1,8 @@
 package com.tongkang.wxshop.service;
 
-import com.tongkang.wxshop.entity.DataStatus;
+import com.tongkang.api.DataStatus;
 import com.tongkang.wxshop.entity.HttpException;
 import com.tongkang.wxshop.entity.PageResponse;
-import com.tongkang.wxshop.generator.Goods;
-import com.tongkang.wxshop.generator.GoodsMapper;
-import com.tongkang.wxshop.generator.Shop;
-import com.tongkang.wxshop.generator.ShopMapper;
-import com.tongkang.wxshop.generator.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

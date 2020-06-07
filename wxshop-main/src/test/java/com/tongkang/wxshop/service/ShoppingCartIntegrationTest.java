@@ -9,7 +9,6 @@ import com.tongkang.wxshop.entity.PageResponse;
 import com.tongkang.wxshop.entity.Response;
 import com.tongkang.wxshop.entity.ShoppingCartData;
 import com.tongkang.wxshop.entity.ShoppingCartGoods;
-import com.tongkang.wxshop.generator.Goods;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
