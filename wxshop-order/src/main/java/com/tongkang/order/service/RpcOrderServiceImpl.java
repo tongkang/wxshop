@@ -3,7 +3,7 @@ package com.tongkang.order.service;
 import com.tongkang.api.data.OrderInfo;
 import com.tongkang.api.generator.Order;
 import com.tongkang.api.generator.OrderMapper;
-import com.tongkang.api.rpc.OrderService;
+import com.tongkang.api.rpc.OrderRpcService;
 import com.tongkang.order.mapper.MyOrderMapper;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.function.BooleanSupplier;
 import static com.tongkang.api.DataStatus.PENDING;
 
 @Service(version = "${wxshop.orderservice.version}")
-public class RpcOrderServiceImpl implements OrderService {
+public class RpcOrderServiceImpl implements OrderRpcService {
 
     private OrderMapper orderMapper;
     private MyOrderMapper myOrderMapper;
